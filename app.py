@@ -381,7 +381,7 @@ with st.sidebar:
         st.caption("Para PDF: pip install reportlab")
 
     st.divider()
-    st.caption("Una produccion de:\nAECID | Cooperacion Espanola\nAyuda en Accion")
+    st.caption("Una produccion de:\nFundación Ayuda en Acción | Agencia Española de Cooperacion \nInternacional para el Desarrollo")
 
 # =============================================================================
 #  UTILIDADES
