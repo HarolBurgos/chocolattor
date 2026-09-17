@@ -40,7 +40,7 @@ st.set_page_config(
 st.markdown("""
 <style>
 .stApp { background-color: #FFF8F2; }
-section[data-testid="stSidebar"] { background-color: #3D1F00 !important; }
+section[data-testid="stSidebar"] { background-color: #006776 !important; }
 section[data-testid="stSidebar"] * { color: #FFE8D6 !important; }
 h1 { color: #E8490F !important; }
 h2, h3 { color: #007A87 !important; }
