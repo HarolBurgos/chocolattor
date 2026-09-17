@@ -96,13 +96,13 @@ section[data-testid="stSidebar"] [data-testid="stFileUploader"] * {
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploader"] button {
     background-color: #F4A261 !important;
-    color: #006776 !important;
+    color: #2C1A0E !important;
     border: none !important;
     border-radius: 6px !important;
     font-weight: bold !important;
 }
 section[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
-    background-color: #2C1A0E !important;
+    background-color: #006776 !important;
 }
 /* Labels del sidebar */
 section[data-testid="stSidebar"] label {
