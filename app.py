@@ -53,7 +53,7 @@ h2, h3 { color: #007A87 !important; }
 }
 .stButton > button:hover { background-color: #007A87 !important; color: white !important; }
 [data-testid="metric-container"] {
-    background: #FFF0E6; border: 1px solid #F4A261;
+    background: #F87C56; border: 1px solid #F4A261;
     border-radius: 8px; padding: 8px;
 }
 .info-box {
