@@ -64,7 +64,7 @@ h2, h3 { color: #007A87 !important; }
 /* Botones dentro del sidebar */
 section[data-testid="stSidebar"] .stDownloadButton > button {
     background-color: #F4A261 !important;
-    color: #006776 !important;
+    color: #2C1A0E !important;
     border: none !important;
     border-radius: 6px !important;
     font-weight: bold !important;
@@ -76,7 +76,7 @@ section[data-testid="stSidebar"] .stDownloadButton > button:hover {
 }
 section[data-testid="stSidebar"] .stButton > button {
     background-color: #F4A261 !important;
-    color: #2C1A0E !important;
+    color: #006776 !important;
     border: none !important;
     border-radius: 6px !important;
     font-weight: bold !important;
