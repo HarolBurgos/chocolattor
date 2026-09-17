@@ -517,7 +517,7 @@ def p1():
                     mp.insumos = [i for i in mp.insumos if i.nombre != del_i]
                     st.rerun()
 
-        with st.expander("Agregar Insumo al Batch", expanded=not mp.insumos):
+        with st.expander("Agregar Insumo o gasto por Batch", expanded=not mp.insumos):
             c1, c2, c3, c4 = st.columns(4)
             nom_i  = c1.text_input("Nombre:", key="ins_nom")
             cant_i = c2.number_input("Cantidad:", min_value=0.0, step=0.5, key="ins_cant")
