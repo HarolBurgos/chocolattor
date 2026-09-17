@@ -1,7 +1,7 @@
 """
 Chocolattor Web v5
 Calculadora de Costos para Chocolate
-ASOCACAO | AECID | Cooperacion Espanola | Ayuda en Accion
+| AECID | Cooperacion Espanola | Ayuda en Accion
 """
 import streamlit as st
 import json, math, io
@@ -275,8 +275,8 @@ def generar_pdf():
     s += [Spacer(1, 20),
           HRFlowable(width="100%", thickness=0.5, color=colors.grey),
           Spacer(1, 4),
-          Paragraph("Chocolattor v5 Web  |  ASOCACAO - Policarpa, Narino  |  " +
-                    "AECID, Cooperacion Espanola y Ayuda en Accion  |  " +
+          Paragraph("Chocolattor v5 Web  |   Ayuda en Accion |  " +
+                    "Agencia Española de Cooperación Internacional para el Desarrollo - AECID |  " +
                     datetime.now().strftime("%d/%m/%Y %H:%M"), ft)]
     doc.build(s)
     return buf.getvalue()
@@ -398,8 +398,7 @@ def pie():
         with col2:
             st.image(tirilla, use_container_width=True)
     st.markdown("""<div class="footer">
-    Chocolattor v5 Web | ASOCACAO - Policarpa, Narino |
-    Una produccion de: AECID, Cooperacion Espanola y Ayuda en Accion
+    Chocolattor v5 Web | Una produccion de: Ayuda en Accion y La Agencia Espanola de Cooperación Internacional para el Desarrollo - AECID
     </div>""", unsafe_allow_html=True)
 
 def selector_pres(key):
