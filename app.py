@@ -507,7 +507,7 @@ def p1():
                          "Costo Total ($)": f"${i.costo_total():,.1f}"} for i in mp.insumos]
             st.dataframe(filas_i, use_container_width=True, hide_index=True)
             total_b = sum(i.costo_total() for i in mp.insumos)
-            st.info(f"Total insumos batch: **${total_b:,.1f}**  |  "
+            st.info(f"Total costo por batch: **${total_b:,.1f}**  |  "
                     f"Costo/kg: **${mp.costo_por_kg():,.1f}**")
 
             with st.expander("Eliminar un insumo"):
