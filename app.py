@@ -32,7 +32,7 @@ except ImportError:
 # =============================================================================
 st.set_page_config(
     page_title="Chocolattor - Calculadora de Costos",
-    page_icon="chocolattor",
+    page_icon="images/Icono.png" if __import__("os").path.exists("images/Icono.png") else "🍫",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -285,8 +285,15 @@ def generar_pdf():
 #  SIDEBAR
 # =============================================================================
 with st.sidebar:
+    # Logo ASOCACAO
+    import os
+    logo_asoc = "images/Logo_asociacion.png"
+    if os.path.exists(logo_asoc):
+        st.image(logo_asoc, width=150)
+    else:
+        st.markdown("### ASOCACAO")
     st.markdown("## Chocolattor")
-    st.markdown("*Calculadora de Costos*  \n**ASOCACAO**")
+    st.markdown("*Calculadora de Costos*")
     st.divider()
 
     pagina = st.radio("", [
@@ -383,6 +390,13 @@ def info(txt):
     st.markdown(f'<div class="info-box">ℹ️ {txt}</div>', unsafe_allow_html=True)
 
 def pie():
+    import os
+    st.divider()
+    tirilla = "images/Tirilla_OPC.png"
+    if os.path.exists(tirilla):
+        col1, col2, col3 = st.columns([1, 4, 1])
+        with col2:
+            st.image(tirilla, use_container_width=True)
     st.markdown("""<div class="footer">
     Chocolattor v5 Web | ASOCACAO - Policarpa, Narino |
     Una produccion de: AECID, Cooperacion Espanola y Ayuda en Accion
