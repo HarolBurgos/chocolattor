@@ -57,7 +57,7 @@ h2, h3 { color: #007A87 !important; }
     border-radius: 8px; padding: 8px;
 }
 .info-box {
-    background: #FFF0E6; border-left: 4px solid #007A87;
+    background: #F87C56; border-left: 4px solid #007A87;
     padding: 10px 14px; border-radius: 4px;
     margin-bottom: 12px; font-size: .9em; color: #007A87;
 }
