@@ -61,6 +61,56 @@ h2, h3 { color: #007A87 !important; }
     padding: 10px 14px; border-radius: 4px;
     margin-bottom: 12px; font-size: .9em; color: #007A87;
 }
+/* Botones dentro del sidebar */
+section[data-testid="stSidebar"] .stDownloadButton > button {
+    background-color: #F4A261 !important;
+    color: #2C1A0E !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+    width: 100% !important;
+}
+section[data-testid="stSidebar"] .stDownloadButton > button:hover {
+    background-color: #007A87 !important;
+    color: white !important;
+}
+section[data-testid="stSidebar"] .stButton > button {
+    background-color: #F4A261 !important;
+    color: #2C1A0E !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+}
+section[data-testid="stSidebar"] .stButton > button:hover {
+    background-color: #007A87 !important;
+    color: white !important;
+}
+/* File uploader dentro del sidebar */
+section[data-testid="stSidebar"] [data-testid="stFileUploader"] {
+    background-color: #2C1A0E !important;
+    border: 2px dashed #F4A261 !important;
+    border-radius: 8px !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploader"] * {
+    color: #FFE8D6 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploader"] button {
+    background-color: #F4A261 !important;
+    color: #2C1A0E !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-weight: bold !important;
+}
+section[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
+    background-color: #2C1A0E !important;
+}
+/* Labels del sidebar */
+section[data-testid="stSidebar"] label {
+    color: #FFE8D6 !important;
+}
+section[data-testid="stSidebar"] small {
+    color: #F4A261 !important;
+}
 .precio-box {
     background: #EDF7F6; border: 2px solid #007A87;
     border-radius: 10px; padding: 14px 20px;
