@@ -87,7 +87,7 @@ section[data-testid="stSidebar"] .stButton > button:hover {
 }
 /* File uploader dentro del sidebar */
 section[data-testid="stSidebar"] [data-testid="stFileUploader"] {
-    background-color: #2C1A0E !important;
+    background-color: #006776 !important;
     border: 2px dashed #F4A261 !important;
     border-radius: 8px !important;
 }
