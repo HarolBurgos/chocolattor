@@ -477,7 +477,7 @@ def p1():
         filas = [{"MP": mp.nombre,
                   "Batch kg": round(mp.batch_kg, 1),
                   "Rendim %": f"{mp.rendimiento:.1f}%",
-                  "Costo/kg ($)": f"${mp.costo_por_kg():,.1f}",
+                  "Costo/kg ($)": f"${mp.costo_por_kg():,.0f}",
                   "Costo/g ($)":  f"${mp.costo_por_gramo():,.1f}",
                   "N Insumos": len(mp.insumos)} for mp in mps]
         st.dataframe(filas, use_container_width=True, hide_index=True)
