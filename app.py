@@ -478,7 +478,7 @@ def p1():
                   "Batch kg": round(mp.batch_kg, 1),
                   "Rendim %": f"{mp.rendimiento:.1f}%",
                   "Costo/kg ($)": f"${mp.costo_por_kg():,.1f}",
-                  "Costo/g ($)":  f"${mp.costo_por_gramo():,.4f}",
+                  "Costo/g ($)":  f"${mp.costo_por_gramo():,.1f}",
                   "N Insumos": len(mp.insumos)} for mp in mps]
         st.dataframe(filas, use_container_width=True, hide_index=True)
 
@@ -571,7 +571,7 @@ def p2():
     if igs:
         filas = [{"Nombre": i.nombre, "Cantidad": i.cantidad, "Unidad": i.unidad,
                   "Costo Total ($)": f"${i.costo_total:,.1f}",
-                  "$/gramo": f"${i.costo_por_gramo():,.4f}"} for i in igs]
+                  "$/gramo": f"${i.costo_por_gramo():,.1f}"} for i in igs]
         st.dataframe(filas, use_container_width=True, hide_index=True)
         with st.expander("Eliminar insumo general"):
             del_ig = st.selectbox("Insumo:", [i.nombre for i in igs], key="del_ig")
@@ -595,7 +595,7 @@ def p2():
         else:
             nuevo = InsumoGeneral(nom_ig, cant_ig, uni_ig, ct_ig)
             st.session_state.igs.append(nuevo)
-            st.success(f"'{nom_ig}' agregado. Costo/g: ${nuevo.costo_por_gramo():,.4f}")
+            st.success(f"'{nom_ig}' agregado. Costo/g: ${nuevo.costo_por_gramo():,.1f}")
             st.rerun()
 
 # =============================================================================
@@ -683,7 +683,7 @@ def p4():
     c2.metric("Suma proporciones", f"{suma:.1f}%",
               delta="OK" if 99 <= suma <= 101 else "Debe ser 100%",
               delta_color="normal" if 99 <= suma <= 101 else "inverse")
-    c3.metric("Costo variable insumos", f"${cvi:,.4f}")
+    c3.metric("Costo variable insumos", f"${cvi:,.1f}")
 
     if p.formulacion:
         filas_f = []
