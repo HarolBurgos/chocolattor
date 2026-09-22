@@ -370,7 +370,7 @@ with st.sidebar:
         st.markdown(f"""
         <div style='background:#2C1A0E;padding:10px;border-radius:8px;text-align:center;'>
         <div style='color:#F4A261;font-size:.8em;margin-bottom:4px;'>{p_act.nombre}</div>
-        <div style='color:#FFE8D6;font-size:1.2em;font-weight:bold;'>Precio: ${pv:,.1f}</div>
+        <div style='color:#FFE8D6;font-size:1.2em;font-weight:bold;'>Precio: ${pv:,.0f}</div>
         </div>""", unsafe_allow_html=True)
         st.markdown("")
 
@@ -478,7 +478,7 @@ def p1():
                   "Batch kg": round(mp.batch_kg, 1),
                   "Rendim %": f"{mp.rendimiento:.1f}%",
                   "Costo/kg ($)": f"${mp.costo_por_kg():,.0f}",
-                  "Costo/g ($)":  f"${mp.costo_por_gramo():,.1f}",
+                  "Costo/g ($)":  f"${mp.costo_por_gramo():,.0f}",
                   "N Insumos": len(mp.insumos)} for mp in mps]
         st.dataframe(filas, use_container_width=True, hide_index=True)
 
@@ -499,16 +499,16 @@ def p1():
         mp.rendimiento = c2.number_input("Rendimiento (%):", value=float(mp.rendimiento),
                                           min_value=1.0, max_value=100.0,
                                           step=1.0, key="mp_ren")
-        c3.metric("Costo por kg", f"${mp.costo_por_kg():,.1f}")
+        c3.metric("Costo por kg", f"${mp.costo_por_kg():,.0f}")
 
         if mp.insumos:
             filas_i = [{"Nombre": i.nombre, "Cantidad": i.cantidad, "Unidad": i.unidad,
-                         "Costo Unit ($)": f"${i.costo_unit:,.1f}",
-                         "Costo Total ($)": f"${i.costo_total():,.1f}"} for i in mp.insumos]
+                         "Costo Unit ($)": f"${i.costo_unit:,.0f}",
+                         "Costo Total ($)": f"${i.costo_total():,.0f}"} for i in mp.insumos]
             st.dataframe(filas_i, use_container_width=True, hide_index=True)
             total_b = sum(i.costo_total() for i in mp.insumos)
-            st.info(f"Total costo por batch: **${total_b:,.1f}**  |  "
-                    f"Costo/kg: **${mp.costo_por_kg():,.1f}**")
+            st.info(f"Total costo por batch: **${total_b:,.0f}**  |  "
+                    f"Costo/kg: **${mp.costo_por_kg():,.0f}**")
 
             with st.expander("Eliminar un insumo"):
                 del_i = st.selectbox("Insumo a eliminar:",
@@ -570,8 +570,8 @@ def p2():
     igs = IGS()
     if igs:
         filas = [{"Nombre": i.nombre, "Cantidad": i.cantidad, "Unidad": i.unidad,
-                  "Costo Total ($)": f"${i.costo_total:,.1f}",
-                  "$/gramo": f"${i.costo_por_gramo():,.1f}"} for i in igs]
+                  "Costo Total ($)": f"${i.costo_total:,.0f}",
+                  "$/gramo": f"${i.costo_por_gramo():,.0f}"} for i in igs]
         st.dataframe(filas, use_container_width=True, hide_index=True)
         with st.expander("Eliminar insumo general"):
             del_ig = st.selectbox("Insumo:", [i.nombre for i in igs], key="del_ig")
@@ -595,7 +595,7 @@ def p2():
         else:
             nuevo = InsumoGeneral(nom_ig, cant_ig, uni_ig, ct_ig)
             st.session_state.igs.append(nuevo)
-            st.success(f"'{nom_ig}' agregado. Costo/g: ${nuevo.costo_por_gramo():,.1f}")
+            st.success(f"'{nom_ig}' agregado. Costo/g: ${nuevo.costo_por_gramo():,.0f}")
             st.rerun()
 
 # =============================================================================
@@ -615,8 +615,8 @@ def p3():
             pv  = p.precio_venta(mps, igs, tcf)
             filas.append({"Presentacion": p.nombre,
                           "Peso g": int(p.peso_g),
-                          "Costo Total ($)": f"${ctu:,.1f}",
-                          "Precio Venta ($)": f"${pv:,.1f}",
+                          "Costo Total ($)": f"${ctu:,.0f}",
+                          "Precio Venta ($)": f"${pv:,.0f}",
                           "IVA %": f"{p.iva_pct:.1f}%",
                           "Ganancia %": f"{p.ganancia_pct:.1f}%",
                           "Prod/mes": int(p.cantidad_mensual)})
@@ -633,9 +633,9 @@ def p3():
         pv = p_sel.precio_venta(mps, igs, tcf)
         ctu = p_sel.costo_total_unit(mps, igs, tcf)
         c1, c2, c3 = st.columns(3)
-        c1.metric("Precio de Venta", f"${pv:,.1f}")
-        c2.metric("Costo Total Unit.", f"${ctu:,.1f}")
-        c3.metric("Margen", f"${pv - ctu:,.1f}")
+        c1.metric("Precio de Venta", f"${pv:,.0f}")
+        c2.metric("Costo Total Unit.", f"${ctu:,.0f}")
+        c3.metric("Margen", f"${pv - ctu:,.0f}")
 
         if st.button("Eliminar presentacion seleccionada", type="secondary"):
             ps.pop(idx)
@@ -683,7 +683,7 @@ def p4():
     c2.metric("Suma proporciones", f"{suma:.1f}%",
               delta="OK" if 99 <= suma <= 101 else "Debe ser 100%",
               delta_color="normal" if 99 <= suma <= 101 else "inverse")
-    c3.metric("Costo variable insumos", f"${cvi:,.1f}")
+    c3.metric("Costo variable insumos", f"${cvi:,.0f}")
 
     if p.formulacion:
         filas_f = []
@@ -738,11 +738,11 @@ def p5():
     info("Gastos que no dependen del volumen: arriendo, nomina, servicios, depreciacion...")
 
     cfs = CFS(); tcf = TCF()
-    st.metric("Total Costos Fijos Mensuales", f"${tcf:,.1f}")
+    st.metric("Total Costos Fijos Mensuales", f"${tcf:,.0f}")
 
     if cfs:
         filas = [{"Nombre": c.nombre, "Categoria": c.categoria,
-                  "Monto ($)": f"${c.monto:,.1f}"} for c in cfs]
+                  "Monto ($)": f"${c.monto:,.0f}"} for c in cfs]
         st.dataframe(filas, use_container_width=True, hide_index=True)
         with st.expander("Eliminar costo fijo"):
             del_cf = st.selectbox("Costo:", [c.nombre for c in cfs], key="del_cf")
@@ -794,12 +794,12 @@ def p6():
     pv  = p.precio_venta(mps, igs, tcf)
 
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("CF Totales Mensual",   f"${tcf:,.1f}")
-    c2.metric("Costo Fijo Unitario",  f"${cfu:,.1f}")
-    c3.metric("Costo Variable Unit.", f"${cvu:,.1f}")
-    c4.metric("Costo Total Unitario", f"${ctu:,.1f}")
+    c1.metric("CF Totales Mensual",   f"${tcf:,.0f}")
+    c2.metric("Costo Fijo Unitario",  f"${cfu:,.0f}")
+    c3.metric("Costo Variable Unit.", f"${cvu:,.0f}")
+    c4.metric("Costo Total Unitario", f"${ctu:,.0f}")
 
-    st.markdown(f'<div class="precio-box">Precio de Venta de {p.nombre}: ${pv:,.1f}</div>',
+    st.markdown(f'<div class="precio-box">Precio de Venta de {p.nombre}: ${pv:,.0f}</div>',
                 unsafe_allow_html=True)
 
 # =============================================================================
@@ -822,16 +822,16 @@ def p7():
     cfu = p.costo_fijo_unit(tcf)
     ctu = cvi + cog + cfu
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("CV Insumos",        f"${cvi:,.1f}")
-    c2.metric("Otros Gastos",      f"${cog:,.1f}")
-    c3.metric("CF Unitario",       f"${cfu:,.1f}")
-    c4.metric("Costo Total Unit.", f"${ctu:,.1f}")
+    c1.metric("CV Insumos",        f"${cvi:,.0f}")
+    c2.metric("Otros Gastos",      f"${cog:,.0f}")
+    c3.metric("CF Unitario",       f"${cfu:,.0f}")
+    c4.metric("Costo Total Unit.", f"${ctu:,.0f}")
 
     if p.otros_gastos:
-        filas = [{"Nombre": g.nombre, "Costo Unitario ($)": f"${g.costo_unit:,.1f}"}
+        filas = [{"Nombre": g.nombre, "Costo Unitario ($)": f"${g.costo_unit:,.0f}"}
                  for g in p.otros_gastos]
         st.dataframe(filas, use_container_width=True, hide_index=True)
-        st.info(f"Total otros gastos: **${p.costo_otros():,.1f}**")
+        st.info(f"Total otros gastos: **${p.costo_otros():,.0f}**")
         with st.expander("Eliminar gasto"):
             del_og = st.selectbox("Gasto:", [g.nombre for g in p.otros_gastos], key="del_og")
             if st.button("Eliminar", key="btn_del_og"):
@@ -866,7 +866,7 @@ def p8():
     tcf = TCF(); mps = MPS(); igs = IGS()
     ctu = p.costo_total_unit(mps, igs, tcf)
     info(f"Configura los margenes para **{p.nombre}**. "
-         f"Costo Total Unitario: **${ctu:,.1f}**")
+         f"Costo Total Unitario: **${ctu:,.0f}**")
 
     c1, c2 = st.columns(2)
     iva = c1.number_input("% IVA:", min_value=0.0, max_value=100.0,
@@ -878,12 +878,12 @@ def p8():
     pv = p.precio_venta(mps, igs, tcf)
     mg = pv - ctu
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("Costo Total Unit.", f"${ctu:,.1f}")
-    c2.metric("IVA aplicado",      f"${ctu * iva / 100:,.1f}")
-    c3.metric("Margen ($)",        f"${mg:,.1f}")
-    c4.metric("PRECIO DE VENTA",   f"${pv:,.1f}")
+    c1.metric("Costo Total Unit.", f"${ctu:,.0f}")
+    c2.metric("IVA aplicado",      f"${ctu * iva / 100:,.0f}")
+    c3.metric("Margen ($)",        f"${mg:,.0f}")
+    c4.metric("PRECIO DE VENTA",   f"${pv:,.0f}")
 
-    st.markdown(f'<div class="precio-box">Precio de Venta de {p.nombre}: ${pv:,.1f}</div>',
+    st.markdown(f'<div class="precio-box">Precio de Venta de {p.nombre}: ${pv:,.0f}</div>',
                 unsafe_allow_html=True)
 
 # =============================================================================
@@ -893,7 +893,7 @@ def p9():
     st.title("9. Punto de Equilibrio")
     tcf = TCF(); mps = MPS(); igs = IGS()
     info(f"PE = Costos Fijos / Margen de Contribucion  |  "
-         f"CF Mensuales Totales: **${tcf:,.1f}**")
+         f"CF Mensuales Totales: **${tcf:,.0f}**")
 
     if not PRES():
         st.warning("No hay presentaciones creadas."); return
@@ -906,15 +906,15 @@ def p9():
         if mc > 0:
             pe_u = math.ceil(tcf / mc)
             pe_i = pe_u * pv
-            pu = f"{pe_u:,}"; pi = f"${pe_i:,.1f}"
+            pu = f"{pe_u:,}"; pi = f"${pe_i:,.0f}"
         else:
             pe_u = float("inf"); pe_i = float("inf")
             pu = "N/A"; pi = "N/A"
         resultados.append((p, pv, cvu, mc, pe_u, pe_i))
         filas.append({"Presentacion": p.nombre,
-                      "Precio ($)": f"${pv:,.1f}",
-                      "CV Unit ($)": f"${cvu:,.1f}",
-                      "MC ($)": f"${mc:,.1f}",
+                      "Precio ($)": f"${pv:,.0f}",
+                      "CV Unit ($)": f"${cvu:,.0f}",
+                      "MC ($)": f"${mc:,.0f}",
                       "PE Unid/mes": pu,
                       "PE Ingresos ($)": pi})
 
@@ -982,8 +982,8 @@ def p10():
                 if acc >= 0 and pb is None: pb = i
 
             c1, c2, c3, c4 = st.columns(4)
-            c1.metric("Flujo Neto Mensual", f"${fn:,.1f}")
-            c2.metric("VPN", f"${vpn:,.1f}",
+            c1.metric("Flujo Neto Mensual", f"${fn:,.0f}")
+            c2.metric("VPN", f"${vpn:,.0f}",
                       delta="VIABLE" if vpn > 0 else "NO VIABLE",
                       delta_color="normal" if vpn > 0 else "inverse")
             c3.metric("TIR Anual", f"{tir_a*100:.2f}%" if tir_a else "N/A")
@@ -1042,18 +1042,18 @@ def p11():
             fn = ing - cv - tcf; saldo += fn
             ml.append(mes); il.append(ing); fnl.append(fn); sl.append(saldo)
             filas.append({"Mes": mes,
-                          "Ingresos ($)":   f"${ing:,.1f}",
-                          "CV Total ($)":   f"${cv:,.1f}",
-                          "CF ($)":         f"${tcf:,.1f}",
-                          "Flujo Neto ($)": f"${fn:,.1f}",
-                          "Saldo Acum ($)": f"${saldo:,.1f}"})
+                          "Ingresos ($)":   f"${ing:,.0f}",
+                          "CV Total ($)":   f"${cv:,.0f}",
+                          "CF ($)":         f"${tcf:,.0f}",
+                          "Flujo Neto ($)": f"${fn:,.0f}",
+                          "Saldo Acum ($)": f"${saldo:,.0f}"})
 
         st.dataframe(filas, use_container_width=True, hide_index=True)
         c1, c2, c3 = st.columns(3)
-        c1.metric("Total Ingresos",   f"${sum(il):,.1f}")
-        c2.metric("Total Flujo Neto", f"${sum(fnl):,.1f}",
+        c1.metric("Total Ingresos",   f"${sum(il):,.0f}")
+        c2.metric("Total Flujo Neto", f"${sum(fnl):,.0f}",
                   delta_color="normal" if sum(fnl) >= 0 else "inverse")
-        c3.metric("Saldo Final",      f"${sl[-1]:,.1f}",
+        c3.metric("Saldo Final",      f"${sl[-1]:,.0f}",
                   delta_color="normal" if sl[-1] >= 0 else "inverse")
 
         if MPL:
